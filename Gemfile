@@ -22,6 +22,7 @@ gem 'turbolinks'
 gem 'jbuilder', '~> 2.0'
 gem 'bootstrap-sass'
 gem 'autoprefixer-rails'
+gem 'simple_form'
 
 
 # bundle exec rake doc:rails generates the API under doc/api.

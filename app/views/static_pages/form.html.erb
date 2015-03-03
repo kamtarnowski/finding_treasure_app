@@ -1,0 +1,18 @@
+<div class="container">
+  <div class="row">
+
+    <div class="col-md-6">
+        <%= simple_form_for root_path do |form| %>
+        <%= form.error_notification %>
+
+        <%= form.input :length, label: 'Length' %>
+        <%= form.input :latitude, label: 'Latitude' %>
+        <%= form.input :email, label: 'Email', as: :email %>
+
+        <%= form.button :submit, 'Submit' %>
+
+        <% end %>
+    </div>
+
+  </div>
+</div>
