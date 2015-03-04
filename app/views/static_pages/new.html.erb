@@ -1,18 +1,53 @@
+
+
 <div class="container">
-  <div class="row">
 
-    <div class="col-md-6">
-      <%= simple_form_for root_path do |form| %>
-          <%= form.error_notification %>
+  <div class="row" style="padding-top: 30px">
+      <%= simple_form_for :forms, url: { action: :form, controller: 'static_pages'} do |form| %>
 
-          <%= form.input :length, label: 'Length' %>
-          <%= form.input :latitude, label: 'Latitude' %>
-          <%= form.input :email, label: 'Email', as: :email %>
+        <div class="col-md-10 col-md-offset-1 col-xs-10 col-xs-offset-1">
+
+          <div id="map-canvas" style="width: 100%; height: 400px; webkit-transform: none !important; position: static !important; transform: none !important"></div>
+
+          <%= form.input :longitude, as: :hidden %>
+          <%= form.input :latitude, as: :hidden %>
+
+        </div>
+
+        <div class="col-md-6 col-md-offset-2 col-xs-10 col-xs-offset-1" style="padding-top: 30px">
+          <%= form.input :email %>
 
           <%= form.button :submit, 'Submit' %>
 
+        </div>
+
       <% end %>
-    </div>
 
   </div>
 </div>
+
+
+<script>
+    $(document).ready(function() {
+        function initialize() {
+            var mapOptions = {
+                zoom: 8,
+                center: new google.maps.LatLng(-34.397, 150.644)
+            };
+
+            var map = new google.maps.Map(document.getElementById('map-canvas'),
+                    mapOptions);
+        }
+        initialize();
+    });
+
+//    $(window).ready(
+//    function loadScript() {
+//        var script = document.createElement('script');
+//        script.type = 'text/javascript';
+//        script.src = 'https://maps.googleapis.com/maps/api/js?v=3.exp' +
+//                '&signed_in=true&callback=initialize';
+//        document.body.appendChild(script);
+//    });
+
+</script>

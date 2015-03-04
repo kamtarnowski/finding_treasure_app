@@ -4,9 +4,16 @@ class StaticPagesController < ApplicationController
 
   def form
     if request.post?
-      render :new
+      len = :forms[:longitude]
+      lat = :forms[:latitude]
+      email = :forms[:email]
+
+
+      redirect_to root_path
+      
+
     else
-      redirect_to root_url, :notice => 'Success'
+
     end
   end
 end
