@@ -32,6 +32,8 @@ development:
 test:
   <<: *default
   database: finding_treasure_app_test
+  username: postgres
+  password: password
 
 production:
   <<: *default

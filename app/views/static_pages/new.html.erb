@@ -1,44 +1,83 @@
 
-
 <div class="container">
-
   <div class="row" style="padding-top: 30px">
+    <div id="hint" class="bg-info" style="padding: 3px; display: none"><h4 style="text-indent: 30px">Select the coordinates on the map below by clicking left button</h4></div>
       <%= simple_form_for :forms, url: { action: :form, controller: 'static_pages'} do |form| %>
 
-        <div class="col-md-10 col-md-offset-1 col-xs-10 col-xs-offset-1">
-
+        <div class="col-md-12 col-xs-12 ">
           <div id="map-canvas" style="width: 100%; height: 400px; webkit-transform: none !important; position: static !important; transform: none !important"></div>
 
           <%= form.input :longitude, as: :hidden %>
           <%= form.input :latitude, as: :hidden %>
-
         </div>
 
         <div class="col-md-6 col-md-offset-2 col-xs-10 col-xs-offset-1" style="padding-top: 30px">
-          <%= form.input :email %>
-
+          <%= form.input :email, required: false %>
           <%= form.button :submit, 'Submit' %>
-
         </div>
 
       <% end %>
-
   </div>
 </div>
 
-
 <script>
     $(document).ready(function() {
+        var map;
+        var markers = [];
         function initialize() {
             var mapOptions = {
-                zoom: 8,
-                center: new google.maps.LatLng(-34.397, 150.644)
+                zoom: 10,
+                center: new google.maps.LatLng(50.061651, 19.937354)
             };
 
             var map = new google.maps.Map(document.getElementById('map-canvas'),
                     mapOptions);
+
+            google.maps.event.addListener(map, 'click', function(event){
+                deleteMarkers();
+                var lat = event.latLng.lat();
+                var lng = event.latLng.lng();
+                var marker = addMarker(event.latLng);
+
+
+                $('#forms_longitude').val(lng);
+                $('#forms_latitude').val(lat);
+            });
+
+            function addMarker(location) {
+                var marker = new google.maps.Marker({
+                    position: location,
+                    map: map
+                });
+                markers.push(marker);
+            }
+            function setAllMap(map) {
+                for (var i = 0; i < markers.length; i++) {
+                    markers[i].setMap(map);
+                }
+            }
+            function clearMarkers() {
+                setAllMap(null);
+            }
+            function showMarkers() {
+                setAllMap(map);
+            }
+            function deleteMarkers() {
+                clearMarkers();
+                markers = [];
+            }
         }
+
         initialize();
+
+        $('#map-canvas')
+                .mouseenter(function(){
+                    $('#hint').fadeIn()
+                })
+                .mouseleave(function(){
+                    $('#hint').fadeOut()
+                });
+
     });
 
 //    $(window).ready(
