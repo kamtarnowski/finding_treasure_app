@@ -5,11 +5,11 @@ class StaticPagesController < ApplicationController
   def form
     respond_to do |format|
       if request.post?
-        result = distance_cor(params[:forms][:longitude].to_i, params[:forms][:latitude].to_i).to_i
+        result = distance_cor(params[:forms][:latitude].to_i, params[:forms][:longitude].to_i).to_i
         @object = { status: 'ok', distance: result }
         if 5 >= result &&  result > 0
           format.html
-          format.js { render 'success.js.erb' }
+          format.js {  }
 
         elsif result > 5
           format.html
@@ -18,18 +18,10 @@ class StaticPagesController < ApplicationController
 
         else
           format.html
-          format.js { render 'error.js.erb' }
+          format.js {  }
 
         end
       end
     end
-  end
-
-  def distance_cor(longtitude, lantitude)
-    treasure = [50.051227, 19.945704]
-    delta_lat = (lantitude - treasure[1]).abs
-    delta_lon = (longtitude - treasure[0]).abs
-    d_xy = (Math.sqrt(delta_lon**2 + delta_lat**2)).round(6)
-    (d_xy * 111196.672).round
   end
 end
