@@ -1,23 +1,24 @@
-
 <div class="container">
   <div class="row" style="padding-top: 30px">
     <div id="hint" class="bg-info" style="padding: 3px; display: none"><h4 style="text-indent: 30px">Select the coordinates on the map below by clicking left button</h4></div>
-      <%= simple_form_for :forms, url: { action: :form, controller: 'static_pages'} do |form| %>
+      <%= simple_form_for :forms, url: { action: :form, controller: 'static_pages'}, remote: true do |form| %>
 
         <div class="col-md-12 col-xs-12 ">
           <div id="map-canvas" style="width: 100%; height: 400px; webkit-transform: none !important; position: static !important; transform: none !important"></div>
-
-          <%= form.input :longitude, as: :hidden %>
-          <%= form.input :latitude, as: :hidden %>
         </div>
 
         <div class="col-md-6 col-md-offset-2 col-xs-10 col-xs-offset-1" style="padding-top: 30px">
-          <%= form.input :email, required: false %>
+          <%= form.input :longitude, required: true %>
+          <%= form.input :latitude, required: true %>
+          <%= form.input :email, required: true %>
           <%= form.button :submit, 'Submit' %>
         </div>
 
       <% end %>
   </div>
+
+  <%= render 'messages' %>
+
 </div>
 
 <script>
@@ -67,7 +68,6 @@
                 markers = [];
             }
         }
-
         initialize();
 
         $('#map-canvas')
@@ -77,16 +77,5 @@
                 .mouseleave(function(){
                     $('#hint').fadeOut()
                 });
-
     });
-
-//    $(window).ready(
-//    function loadScript() {
-//        var script = document.createElement('script');
-//        script.type = 'text/javascript';
-//        script.src = 'https://maps.googleapis.com/maps/api/js?v=3.exp' +
-//                '&signed_in=true&callback=initialize';
-//        document.body.appendChild(script);
-//    });
-
 </script>
