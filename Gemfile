@@ -21,7 +21,7 @@ gem 'jbuilder', '~> 2.0'
 gem 'bootstrap-sass'
 gem 'autoprefixer-rails'
 gem 'simple_form'
-
+gem 'haversine'
 
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0', group: :doc, require: false

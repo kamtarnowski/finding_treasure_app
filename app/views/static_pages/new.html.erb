@@ -35,7 +35,6 @@
                     var p1 = $('#forms_latitude').val();
                     var p2 = $('#forms_longitude').val();
                     var origin = new google.maps.LatLng(p1, p2);
-                    console.log(origin);
                     var treasure = new google.maps.LatLng(50.051227, 19.945704);
                     $('#forms_dist').val(google.maps.geometry.spherical.computeDistanceBetween(origin, treasure));
                 });
