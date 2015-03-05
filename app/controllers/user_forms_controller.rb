@@ -9,10 +9,9 @@ class UserFormsController < ApplicationController
         @form = UserForm.new(params[:user_form])
         @form.request = request
         if @form.valid?
-          lat = @form.latitude.to_i
-          lng = @form.longitude.to_i
-          (distance = distance_via_helper(lat, lng)) if @form.distance == ''
-          distance ||= @form.distance.to_i
+          lat = @form.latitude.to_f
+          lng = @form.longitude.to_f
+          distance = distance_via_helper(lat, lng)
           @success = { status: 'ok', distance: distance }
           @error = { status: 'error', distance: distance < 0 ? (distance) : ('-') }
 
@@ -29,9 +28,12 @@ class UserFormsController < ApplicationController
           end
 
         else
-          (@error_messages = @form.errors.full_messages) if @form.errors.any?
-          if @form.distance.present?
-            @error = { status: 'error', distance: @form.distance, error: @error_messages }
+          @error_messages = @form.errors.full_messages
+          if (@form.latitude && @form.longitude).present?
+            lat = @form.latitude.to_f
+            lng = @form.longitude.to_f
+            distance = distance_via_helper(lat, lng)
+            @error = { status: 'error', distance: distance, error: @error_messages }
           else
             @error = { status: 'error', distance: '-', error: @error_messages }
           end

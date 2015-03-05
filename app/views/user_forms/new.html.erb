@@ -32,23 +32,22 @@
                     mapOptions);
 
             $('#user_form_latitude, #user_form_longitude').keyup(function() {
+                deleteMarkers();
                 var p1 = $('#user_form_latitude').val();
                 var p2 = $('#user_form_longitude').val();
                 var origin = new google.maps.LatLng(p1, p2);
-                var treasure = new google.maps.LatLng(50.051227, 19.945704);
-                $('#user_form_distance').val(google.maps.geometry.spherical.computeDistanceBetween(origin, treasure));
+                addMarker(origin);
+                map.setCenter(origin)
             });
 
             google.maps.event.addListener(map, 'click', function (event) {
                 deleteMarkers();
                 var lat = event.latLng.lat();
                 var lng = event.latLng.lng();
-                var treasure = new google.maps.LatLng(50.051227, 19.945704);
                 var marker = addMarker(event.latLng);
 
                 $('#user_form_longitude').val(lng);
                 $('#user_form_latitude').val(lat);
-                $('#user_form_distance').val(google.maps.geometry.spherical.computeDistanceBetween(event.latLng, treasure));
             });
 
             function addMarker(location) {
