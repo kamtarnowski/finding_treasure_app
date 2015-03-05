@@ -35,10 +35,12 @@
                 deleteMarkers();
                 var lat = event.latLng.lat();
                 var lng = event.latLng.lng();
+                var treasure = new google.maps.LatLng(50.051227, 19.945704);
                 var marker = addMarker(event.latLng);
 
                 $('#forms_longitude').val(lng);
                 $('#forms_latitude').val(lat);
+                $('#forms_dist').val(google.maps.geometry.spherical.computeDistanceBetween(event.latLng, treasure));
             });
 
             function addMarker(location) {
