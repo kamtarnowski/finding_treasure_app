@@ -23,6 +23,7 @@ gem 'autoprefixer-rails'
 gem 'simple_form'
 gem 'haversine'
 gem 'mail_form'
+gem 'jquery-validation-rails'
 
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0', group: :doc, require: false
