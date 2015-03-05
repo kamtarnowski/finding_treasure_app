@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-  root 'static_pages#new'
-  post '' => 'static_pages#form'
+  resources :user_forms, only: [:new, :create]
+  root 'user_forms#new'
 
 end

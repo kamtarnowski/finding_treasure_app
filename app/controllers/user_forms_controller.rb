@@ -1,10 +1,12 @@
-class StaticPagesController < ApplicationController
+class UserFormsController < ApplicationController
   def new
+    @form = UserForm.new
   end
 
-  def form
+  def create
     respond_to do |format|
       if request.post?
+        @form = UserForm.new
         lat = params[:forms][:latitude].to_i
         lng = params[:forms][:longtitude].to_i
         email = params[:forms][:email].to_s
