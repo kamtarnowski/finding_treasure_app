@@ -5,21 +5,21 @@ class StaticPagesController < ApplicationController
   def form
     respond_to do |format|
       if request.post?
+        if params[:forms][:dist] == ''
+
+        end
+        email = params[:forms][:email].to_s
         distance = params[:forms][:dist].to_i
-        @object = { status: 'ok', distance: distance }
-        if 5 >= distance &&  distance > 0
-          format.html
-          format.js {  }
+        @success = { status: 'ok', distance: distance }
+        @error = { status: 'error', distance: distance < 0 ? (distance) : ('-') }
 
+        if 5 >= distance &&  distance >= 0
+          format.js { render :json => @success.to_json, content_type: 'application/json' }
+          FormMailer.congratulations(distance, email)
         elsif distance > 5
-          format.html
-          format.js { render :json => @object.to_json, content_type: 'application/json'}
-
-
+          format.js { render :json => @success.to_json, content_type: 'application/json' }
         else
-          format.html
-          format.js {  }
-
+          format.js { render :json => @error.to_json, content_type: 'application/json' }
         end
       end
     end

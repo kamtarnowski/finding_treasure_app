@@ -31,17 +31,26 @@
             var map = new google.maps.Map(document.getElementById('map-canvas'),
                     mapOptions);
 
-            google.maps.event.addListener(map, 'click', function(event){
-                deleteMarkers();
-                var lat = event.latLng.lat();
-                var lng = event.latLng.lng();
-                var treasure = new google.maps.LatLng(50.051227, 19.945704);
-                var marker = addMarker(event.latLng);
+                $('#forms_latitude, #forms_longitude').keyup(function() {
+                    var p1 = $('#forms_latitude').val();
+                    var p2 = $('#forms_longitude').val();
+                    var origin = new google.maps.LatLng(p1, p2);
+                    console.log(origin);
+                    var treasure = new google.maps.LatLng(50.051227, 19.945704);
+                    $('#forms_dist').val(google.maps.geometry.spherical.computeDistanceBetween(origin, treasure));
+                });
 
-                $('#forms_longitude').val(lng);
-                $('#forms_latitude').val(lat);
-                $('#forms_dist').val(google.maps.geometry.spherical.computeDistanceBetween(event.latLng, treasure));
-            });
+                google.maps.event.addListener(map, 'click', function (event) {
+                    deleteMarkers();
+                    var lat = event.latLng.lat();
+                    var lng = event.latLng.lng();
+                    var treasure = new google.maps.LatLng(50.051227, 19.945704);
+                    var marker = addMarker(event.latLng);
+
+                    $('#forms_longitude').val(lng);
+                    $('#forms_latitude').val(lat);
+                    $('#forms_dist').val(google.maps.geometry.spherical.computeDistanceBetween(event.latLng, treasure));
+                });
 
             function addMarker(location) {
                 var marker = new google.maps.Marker({
