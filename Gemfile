@@ -1,5 +1,6 @@
 source 'https://rubygems.org'
 
+ruby '2.2.0'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.0'
@@ -48,5 +49,8 @@ group :development, :test do
   gem 'spring'
   gem 'rspec-rails'
   gem 'foreman'
+
+gem 'rails_12factor', group: :development
+
 end
 
