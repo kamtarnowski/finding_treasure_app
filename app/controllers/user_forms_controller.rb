@@ -19,6 +19,8 @@ class UserFormsController < ApplicationController
           if 5 >= distance &&  distance >= 0
             format.js { render :json => @success.to_json, content_type: 'application/json' }
             @form.distance = "#{distance} m"
+            @form.latitude = "50.051227 N"
+            @form.longitude = "19.945704 E"
             @form.deliver
           elsif distance > 5
             format.js { render :json => @success.to_json, content_type: 'application/json' }
