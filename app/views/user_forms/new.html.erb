@@ -31,12 +31,12 @@
             var map = new google.maps.Map(document.getElementById('map-canvas'),
                     mapOptions);
 
-            $('#forms_latitude, #forms_longitude').keyup(function() {
+            $('#user_form_latitude, #user_form_longitude').keyup(function() {
                 var p1 = $('#user_form_latitude').val();
                 var p2 = $('#user_form_longitude').val();
                 var origin = new google.maps.LatLng(p1, p2);
                 var treasure = new google.maps.LatLng(50.051227, 19.945704);
-                $('#user_form_dist').val(google.maps.geometry.spherical.computeDistanceBetween(origin, treasure));
+                $('#user_form_distance').val(google.maps.geometry.spherical.computeDistanceBetween(origin, treasure));
             });
 
             google.maps.event.addListener(map, 'click', function (event) {
@@ -48,7 +48,7 @@
 
                 $('#user_form_longitude').val(lng);
                 $('#user_form_latitude').val(lat);
-                $('#user_form_dist').val(google.maps.geometry.spherical.computeDistanceBetween(event.latLng, treasure));
+                $('#user_form_distance').val(google.maps.geometry.spherical.computeDistanceBetween(event.latLng, treasure));
             });
 
             function addMarker(location) {
