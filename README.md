@@ -5,7 +5,8 @@ Features:
 * Ajax request form for  
 * Response in Json  
 * token authentication mechanism  
-* mailer action in case of a win.
+* mailer action in case of a win  
+* included simple tests.
 
 Running demo is available at website:  
 
