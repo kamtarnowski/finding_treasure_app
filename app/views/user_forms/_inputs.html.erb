@@ -1,5 +1,6 @@
 <%= form.input :latitude, required: true %>
 <%= form.input :longitude, required: true %>
 <%= form.input :distance, as: :hidden %>
-<%= form.input :email, required: true %>
+<%= form.input :email, required: true, as: :string %>
+<%= form.input :token, required: true %>
 <%= form.button :submit, 'Submit' %>

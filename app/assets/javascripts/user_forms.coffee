@@ -8,4 +8,5 @@ $ ->
       'user_form[latitude]': { required: true, number: true },
       'user_form[longitude]': { required: true, number: true },
       'user_form[email]': { required: true, email: true },
+      'user_form[token]': { required: true }
     }

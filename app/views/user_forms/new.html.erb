@@ -82,14 +82,33 @@
                 .mouseleave(function(){
                     $('#hint').fadeOut()
                 });
-
-        $('#simpleform').on('ajax:success',function(event, data, status, xhr){
-            if (data.status === 'ok') {
-                $('#success').show().delay(5000).fadeOut('slow');
-            }
-            else {
-                $('#error').show().delay(5000).fadeOut('slow');
-            }
+        $('#simpleform').submit(function() {
+            var valuesToSubmit = $(this).serialize();
+            $.ajax({
+                method: "POST",
+                beforeSend: function (request)
+                {
+                    var token = $('#user_form_token').val();
+                    request.setRequestHeader("Authorization", "Token token="+token);
+                },
+                url: $(this).attr('action'),
+                data: valuesToSubmit,
+                dataType: "JSON"
+            }).success(function(data){
+                if (data.status === 'ok') {
+                    $('#success').show().delay(5000).fadeOut('slow');
+                }
+                else {
+                    $('#error').show().delay(5000).fadeOut('slow');
+                }
+            }).error(function(jqXHR, textStatus, errorThrown) {
+                console.log(textStatus, errorThrown);
+                if (errorThrown === 'Unauthorized') {
+                    $('#unauthorized').show().delay(5000).fadeOut('slow');
+                }
+            });
+            return false;
         });
     });
 </script>
+
