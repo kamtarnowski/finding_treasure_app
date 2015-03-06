@@ -29,5 +29,6 @@ pickle-email-*.html
 bower.json
 
 .env
+.env.test
 Procfile
 public/assets/**
