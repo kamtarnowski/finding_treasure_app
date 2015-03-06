@@ -49,6 +49,8 @@ group :development, :test do
   gem 'spring'
   gem 'rspec-rails'
   gem 'foreman'
+  gem 'dotenv-rails'
+  gem 'factory_girl_rails'
 
 gem 'rails_12factor', group: :development
 
