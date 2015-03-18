@@ -57,7 +57,7 @@ ActionMailer::Base.deliveries = []
                 status: 'ok',
                 distance: distance
             }.to_json
-            response.body == @status_ok
+            expect(response.body).to eq @status_ok
           end
         end
       end
