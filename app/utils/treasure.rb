@@ -1,9 +1,6 @@
 class Treasure
 
-  def initialize(lat, lng)
-    @lat= lat
-    @lng= lng
-  end
+  attr_accessor :lat, :lng
 
   def calculate_distance(lat2, lng2)
     treasure = [@lat, @lng]

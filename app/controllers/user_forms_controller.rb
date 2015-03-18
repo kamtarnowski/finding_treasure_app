@@ -10,7 +10,9 @@ class UserFormsController < ApplicationController
   def create
     respond_to do |format|
       if request.post?
-        @treasure = Treasure.new(50.051227, 19.945704)
+        @treasure = Treasure.new
+        @treasure.lat = 50.051227
+        @treasure.lng = 19.945704
         @form = UserForm.new(params[:user_form])
         @form.request = request
         if @form.valid?
